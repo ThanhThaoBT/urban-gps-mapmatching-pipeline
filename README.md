@@ -1,12 +1,13 @@
-# Urban GPS Map-Matching Pipeline for Fleet Management
+# Urban Road Network Map-Matching & Spatial Data Quality Pipeline
 
-An automated, end-to-end spatial data pipeline designed to simulate, process, and clean raw vehicle GPS telemetry data. This project solves the classic "GPS drift" and "urban canyon" problems by automatically snapping noisy GPS points onto the real-world road network of District 1, Ho Chi Minh City, using Python and PostGIS.
+An automated geospatial data pipeline designed to process, validate, and improve the quality of urban road network data. This project performs GPS trajectory simulation, spatial matching, and quality assessment by snapping noisy GPS observations onto real-world OpenStreetMap road networks in District 1, Ho Chi Minh City using Python, PostGIS, and QGIS.
 
 ## 🚀 Key Features
 
-* **Fleet Telemetry Simulation (Python):** Automatically extracts the road network topology using `OSMnx` and generates realistic spatial trajectories for a fleet of 10 vehicles (2000 tracking points).
+* **Urban Road Network Processing & GPS Trajectory Simulation:** 
+Automatically extracts OpenStreetMap road networks using OSMnx, builds spatial topology, and generates synthetic vehicle trajectories for evaluation.
 * **Realistic Noise Injection:** Integrates customized Gaussian Noise to simulate hardware GPS drift and signal multipath reflection in high-density urban areas.
-* **Spatial Database Automation (PostGIS):** Optimizes spatial queries with `GIST` indexes and implements an automated pipeline to snap noisy points to the nearest road centerlines using `ST_ClosestPoint` and `ST_DWithin`.
+* **Spatial Database Automation (PostGIS):** Uses GIST spatial indexes and PostGIS functions (`ST_ClosestPoint`, `ST_DWithin`) to perform automated map-matching and spatial validation.
 * **High Performance:** Processes and matches the entire dataset in under 0.5 seconds.
 * **Visual Quality Control:** Ready-to-use spatial layers for QGIS visualization with discrete categorized styling for fleet auditing.
 
@@ -21,7 +22,7 @@ An automated, end-to-end spatial data pipeline designed to simulate, process, an
 
 The pipeline follows a 3-stage data engineering architecture:
 1. **Data Generation (`step2_generate_gps.py`):** Downloads OSM road networks, simulates sequential vehicle movements, adds time-series timestamps, injects noise, and exports to a large `raw_gps_data.csv`.
-2. **Spatial Processing (`step3_map_matching.py`):** Connects to the spatial database, injects the raw points, builds spatial topology, and executes the geometric map-matching algorithm.
+2. **Spatial Processing (`step3_map_matching.py`):** Connects to the spatial database, injects the raw points, prepares spatial network structures, and executes the geometric map-matching algorithm.
 3. **Export & Visualization:** Outputs a structured `.gpkg` (GeoPackage) file containing both raw and snapped layers for immediate QGIS analysis.
 
 ## 📋 Database Schema
@@ -62,7 +63,8 @@ To make the map data readable and audit the pipeline's accuracy, a professional 
 The PostGIS matching algorithm successfully processes telemetry noise, filtering out the urban drift to produce a clean, synchronized sequence of points bound tightly to the road centerlines.
 * **Categorized Rainbow Palette:** Each vehicle (from XE_01 to XE_10) is assigned a distinct color from a spectral color ramp, allowing simultaneous tracking of multiple trips without confusion.
 * **Raw Points vs. Snapped Points:** The raw data appears as white circles with explicit text labels, clearly showcasing hardware drift inside buildings or parks. In contrast, the post-processed PostGIS output is rendered as a clean sequence of color-coded points aligned perfectly along the road segments (highway_district 1).
-<img width="3507" height="2480" alt="Map Matching Report" src="https://github.com/user-attachments/assets/2da25b95-eaf2-43ca-9302-19c33fb654c9" />
+<img width="3507" height="2480" alt="Map Matching Report" src="https://github.com/user-attachments/assets/a7f9d6ac-0105-4ed4-ad93-18150482ca69" />
+
 
 ### 2. Deep-Dive: Lane-Jumping Error (On Dual Carriageways)
 On major arterial roads like Le Loi Street, which features wide physical central barriers separating opposite traffic directions, heavy GPS drift causes points to cross the median line. Because the current ST_ClosestPoint algorithm matches points independently based strictly on geometric distance, the snapped coordinates "teleport" or jump across lanes, showing an impossible physical movement.
