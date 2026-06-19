@@ -63,7 +63,8 @@ Using **Feature Blending Mode (Addition)** in QGIS, the raw GPS data forms a den
 * **Categorized Rainbow Palette:** Each vehicle (from `XE_01` to `XE_10`) is assigned a distinct color from a spectral color ramp, allowing simultaneous tracking of multiple trips without confusion.
 * **Raw Points vs. Snapped Lines:** For each vehicle, the raw data appears as a scattered, noisy cloud of dots, while the PostGIS output is rendered as a solid, continuous matching line of the same color, snapping perfectly to the road geometry.
 
-<img width="3507" height="2480" alt="Map Matching Report" src="https://github.com/user-attachments/assets/aabd6617-7b31-494a-80f6-ff95925a25ee" />
+<img width="3507" height="2480" alt="Map Matching Report" src="https://github.com/user-attachments/assets/6eb686c7-e1ab-40d4-9bb5-c05cfc0380f6" />
+
 
 
 ### 2. Deep-Dive: Lane-Jumping Error (On Dual Carriageways)
