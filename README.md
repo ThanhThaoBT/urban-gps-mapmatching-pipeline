@@ -62,10 +62,7 @@ To make the map data readable and audit the pipeline's accuracy, a professional 
 Using **Feature Blending Mode (Addition)** in QGIS, the raw GPS data forms a dense, scattered "heat-cloud" visualizing severe urban drift. The PostGIS matching algorithm successfully processes this data, filtering out the noise to produce a clean, synchronized path bound tightly to the road centerlines.
 * **Categorized Rainbow Palette:** Each vehicle (from `XE_01` to `XE_10`) is assigned a distinct color from a spectral color ramp, allowing simultaneous tracking of multiple trips without confusion.
 * **Raw Points vs. Snapped Lines:** For each vehicle, the raw data appears as a scattered, noisy cloud of dots, while the PostGIS output is rendered as a solid, continuous matching line of the same color, snapping perfectly to the road geometry.
-
-<img width="3507" height="2480" alt="Map Matching Report" src="https://github.com/user-attachments/assets/6eb686c7-e1ab-40d4-9bb5-c05cfc0380f6" />
-
-
+<img width="3507" height="2480" alt="Map Matching Report" src="https://github.com/user-attachments/assets/2da25b95-eaf2-43ca-9302-19c33fb654c9" />
 
 ### 2. Deep-Dive: Lane-Jumping Error (On Dual Carriageways)
 On major arterial roads like Le Loi Street, which features wide physical central barriers separating opposite traffic directions, heavy GPS drift causes points to cross the median line. Because the current ST_ClosestPoint algorithm matches points independently based strictly on geometric distance, the snapped coordinates "teleport" or jump across lanes, showing an impossible physical movement.
