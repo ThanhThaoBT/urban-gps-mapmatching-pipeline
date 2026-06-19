@@ -60,8 +60,8 @@ To make the map data readable and audit the pipeline's accuracy, a professional 
 
 ### 1. Overall Pipeline Output (Raw vs. Snapped)
 The PostGIS matching algorithm successfully processes telemetry noise, filtering out the urban drift to produce a clean, synchronized sequence of points bound tightly to the road centerlines.
-* **Categorized Rainbow Palette: Each vehicle (from XE_01 to XE_10) is assigned a distinct color from a spectral color ramp, allowing simultaneous tracking of multiple trips without confusion.
-* **Raw Points vs. Snapped Points: The raw data appears as white circles with explicit text labels, clearly showcasing hardware drift inside buildings or parks. In contrast, the post-processed PostGIS output is rendered as a clean sequence of color-coded points aligned perfectly along the road segments (highway_district 1).
+* **Categorized Rainbow Palette:** Each vehicle (from XE_01 to XE_10) is assigned a distinct color from a spectral color ramp, allowing simultaneous tracking of multiple trips without confusion.
+* **Raw Points vs. Snapped Points:** The raw data appears as white circles with explicit text labels, clearly showcasing hardware drift inside buildings or parks. In contrast, the post-processed PostGIS output is rendered as a clean sequence of color-coded points aligned perfectly along the road segments (highway_district 1).
 <img width="3507" height="2480" alt="Map Matching Report" src="https://github.com/user-attachments/assets/2da25b95-eaf2-43ca-9302-19c33fb654c9" />
 
 ### 2. Deep-Dive: Lane-Jumping Error (On Dual Carriageways)
