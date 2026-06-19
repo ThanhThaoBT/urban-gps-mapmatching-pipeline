@@ -54,7 +54,8 @@ The pipeline follows a 3-stage data engineering architecture:
    python step3_map_matching.py
 4. Open the generated output_matches.gpkg file in QGIS to visualize the layers.
 
-📊 Visual Quality Control (QC) & Error Analysis
+## 📊 Visual Quality Control (QC) & Error Analysis
+
 To make the map data readable and audit the pipeline's accuracy, a professional QGIS Print Layout was configured with a clear Map Legend and Scale Bar. This allows us to distinguish between raw noisy coordinates and the post-processed tracks while diagnosing structural urban edge cases:
 
 ### 1. Overall Pipeline Output (Raw vs. Snapped)
@@ -71,10 +72,11 @@ On major arterial roads like Le Loi Street, which features wide physical central
 ### 3. Deep-Dive: Street-Jumping Error (On Parallel Streets)
 In grid-like urban sectors where narrow streets run tightly parallel to each other (such as Ly Tu Trong Street and Le Thanh Ton Street), a large GPS drift variance can push a point closer to the adjacent street. Without a temporal network continuity check, the geometric algorithm mistakenly snaps the point to the wrong street entirely.
 
-⚠️ Limitations & Future Work
+## ⚠️ Limitations & Future Work
+
 While the current Geometric Map-Matching approach (ST_ClosestPoint) is highly efficient—processing thousands of rows in milliseconds—point-by-point spatial queries are highly susceptible to severe urban noise.
 
-🔮 Planned Enhancements:
+## 🔮 Planned Enhancements:
 Spatio-Temporal Constraints: Incorporate vehicle heading (bearing/orientation) and calculate speed constraints between sequential timestamps to eliminate physically impossible jumps between lanes or streets.
 
 Advanced Algorithms: Transition from independent point snapping to sequence-to-line matching by researching and implementing Hidden Markov Models (HMM) to solve path-probability estimation across complex road network topologies.
