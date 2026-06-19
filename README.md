@@ -8,7 +8,7 @@ An automated, end-to-end spatial data pipeline designed to simulate, process, an
 * **Realistic Noise Injection:** Integrates customized Gaussian Noise to simulate hardware GPS drift and signal multipath reflection in high-density urban areas.
 * **Spatial Database Automation (PostGIS):** Optimizes spatial queries with `GIST` indexes and implements an automated pipeline to snap noisy points to the nearest road centerlines using `ST_ClosestPoint` and `ST_DWithin`.
 * **High Performance:** Processes and matches the entire dataset in under 0.5 seconds.
-* **Visual Quality Control:** Ready-to-use spatial layers for QGIS visualization with advanced rendering (Feature Blending) for hot-spot density analysis.
+* **Visual Quality Control:** Ready-to-use spatial layers for QGIS visualization with discrete categorized styling for fleet auditing.
 
 ## 🛠️ Tech Stack
 
