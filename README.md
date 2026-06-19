@@ -46,22 +46,22 @@ The pipeline follows a 3-stage data engineering architecture:
    ```bash
    git clone [https://github.com/YOUR_USERNAME/urban-gps-mapmatching-pipeline.git](https://github.com/YOUR_USERNAME/urban-gps-mapmatching-pipeline.git)
    cd urban-gps-mapmatching-pipeline
-2. Activate your GIS environment and run the big data generator:
+2. Activate your GIS environment and run the data:
    ```bash
    python step2_generate_gps.py
 3. Execute the PostGIS map-matching pipeline:
    ```bash
    python step3_map_matching.py
-4. Open the generated output_matches.gpkg file in QGIS to visualize the layers.
+4. Open the generated snapped_gps_route.gpkg file in QGIS to visualize the layers.
 
 ## 📊 Visual Quality Control (QC) & Error Analysis
 
 To make the map data readable and audit the pipeline's accuracy, a professional QGIS Print Layout was configured with a clear Map Legend and Scale Bar. This allows us to distinguish between raw noisy coordinates and the post-processed tracks while diagnosing structural urban edge cases:
 
 ### 1. Overall Pipeline Output (Raw vs. Snapped)
-Using **Feature Blending Mode (Addition)** in QGIS, the raw GPS data forms a dense, scattered "heat-cloud" visualizing severe urban drift. The PostGIS matching algorithm successfully processes this data, filtering out the noise to produce a clean, synchronized path bound tightly to the road centerlines.
-* **Categorized Rainbow Palette:** Each vehicle (from `XE_01` to `XE_10`) is assigned a distinct color from a spectral color ramp, allowing simultaneous tracking of multiple trips without confusion.
-* **Raw Points vs. Snapped Lines:** For each vehicle, the raw data appears as a scattered, noisy cloud of dots, while the PostGIS output is rendered as a solid, continuous matching line of the same color, snapping perfectly to the road geometry.
+The PostGIS matching algorithm successfully processes telemetry noise, filtering out the urban drift to produce a clean, synchronized sequence of points bound tightly to the road centerlines.
+* **Categorized Rainbow Palette: Each vehicle (from XE_01 to XE_10) is assigned a distinct color from a spectral color ramp, allowing simultaneous tracking of multiple trips without confusion.
+* **Raw Points vs. Snapped Points: The raw data appears as white circles with explicit text labels, clearly showcasing hardware drift inside buildings or parks. In contrast, the post-processed PostGIS output is rendered as a clean sequence of color-coded points aligned perfectly along the road segments (highway_district 1).
 <img width="3507" height="2480" alt="Map Matching Report" src="https://github.com/user-attachments/assets/2da25b95-eaf2-43ca-9302-19c33fb654c9" />
 
 ### 2. Deep-Dive: Lane-Jumping Error (On Dual Carriageways)
@@ -75,7 +75,8 @@ In grid-like urban sectors where narrow streets run tightly parallel to each oth
 While the current Geometric Map-Matching approach (ST_ClosestPoint) is highly efficient—processing thousands of rows in milliseconds—point-by-point spatial queries are highly susceptible to severe urban noise.
 
 ## 🔮 Planned Enhancements:
-Spatio-Temporal Constraints: Incorporate vehicle heading (bearing/orientation) and calculate speed constraints between sequential timestamps to eliminate physically impossible jumps between lanes or streets.
 
-Advanced Algorithms: Transition from independent point snapping to sequence-to-line matching by researching and implementing Hidden Markov Models (HMM) to solve path-probability estimation across complex road network topologies.
+* **Spatio-Temporal Constraints: Incorporate vehicle heading (bearing/orientation) and calculate speed constraints between sequential timestamps to eliminate physically impossible jumps between lanes or streets.
+
+* **Advanced Algorithms: Transition from independent point snapping to sequence-to-line matching by researching and implementing Hidden Markov Models (HMM) to solve path-probability estimation across complex road network topologies.
 
