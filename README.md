@@ -4,7 +4,7 @@ An automated, end-to-end spatial data pipeline designed to simulate, process, an
 
 ## 🚀 Key Features
 
-* **Fleet Telemetry Simulation (Python):** Automatically extracts the road network topology using `OSMnx` and generates realistic spatial trajectories for a fleet of 10 vehicles (>1,500 tracking points).
+* **Fleet Telemetry Simulation (Python):** Automatically extracts the road network topology using `OSMnx` and generates realistic spatial trajectories for a fleet of 10 vehicles (2000 tracking points).
 * **Realistic Noise Injection:** Integrates customized Gaussian Noise to simulate hardware GPS drift and signal multipath reflection in high-density urban areas.
 * **Spatial Database Automation (PostGIS):** Optimizes spatial queries with `GIST` indexes and implements an automated pipeline to snap noisy points to the nearest road centerlines using `ST_ClosestPoint` and `ST_DWithin`.
 * **High Performance:** Processes and matches the entire dataset in under 0.5 seconds.
@@ -12,7 +12,7 @@ An automated, end-to-end spatial data pipeline designed to simulate, process, an
 
 ## 🛠️ Tech Stack
 
-* **Language:** Python 3.x
+* **Language:** Python 3.12
 * **Core Libraries:** GeoPandas, OSMnx, NumPy, Pandas, Shapely
 * **Database:** PostgreSQL + PostGIS Extension
 * **GIS Software:** QGIS (for visualization and Spatial QC)
