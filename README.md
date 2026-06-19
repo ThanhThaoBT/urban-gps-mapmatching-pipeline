@@ -20,7 +20,7 @@ An automated, end-to-end spatial data pipeline designed to simulate, process, an
 ## 📐 System Architecture
 
 The pipeline follows a 3-stage data engineering architecture:
-1. **Data Generation (`step2_generate_big_data.py`):** Downloads OSM road networks, simulates sequential vehicle movements, adds time-series timestamps, injects noise, and exports to a large `raw_gps_data.csv`.
+1. **Data Generation (`step2_generate_gps.py`):** Downloads OSM road networks, simulates sequential vehicle movements, adds time-series timestamps, injects noise, and exports to a large `raw_gps_data.csv`.
 2. **Spatial Processing (`step3_map_matching.py`):** Connects to the spatial database, injects the raw points, builds spatial topology, and executes the geometric map-matching algorithm.
 3. **Export & Visualization:** Outputs a structured `.gpkg` (GeoPackage) file containing both raw and snapped layers for immediate QGIS analysis.
 
