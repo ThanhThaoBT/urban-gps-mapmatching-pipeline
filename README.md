@@ -76,7 +76,7 @@ While the current Geometric Map-Matching approach (ST_ClosestPoint) is highly ef
 
 ## 🔮 Planned Enhancements:
 
-* **Spatio-Temporal Constraints: Incorporate vehicle heading (bearing/orientation) and calculate speed constraints between sequential timestamps to eliminate physically impossible jumps between lanes or streets.
+* **Spatio-Temporal Constraints:** Incorporate vehicle heading (bearing/orientation) and calculate speed constraints between sequential timestamps to eliminate physically impossible jumps between lanes or streets.
 
-* **Advanced Algorithms: Transition from independent point snapping to sequence-to-line matching by researching and implementing Hidden Markov Models (HMM) to solve path-probability estimation across complex road network topologies.
+* **Advanced Algorithms:** Transition from independent point snapping to sequence-to-line matching by researching and implementing Hidden Markov Models (HMM) to solve path-probability estimation across complex road network topologies.
 
